@@ -68,7 +68,8 @@ public class MinesweeperGame extends Game {
     @Override
     public void onMouseLeftClick(int x, int y) {
         super.onMouseLeftClick(x, y);
-        openTile(x, y);
+        if (isGameStopped) restart();
+        else openTile(x, y);
     }
 
     @Override
@@ -83,21 +84,31 @@ public class MinesweeperGame extends Game {
         showMessageDialog(Color.AQUA, "it`s over", Color.DEEPPINK, 50);
     }
 
-    private void win(){
+    private void win() {
         isGameStopped = true;
         showMessageDialog(Color.AQUA, "WIN", Color.DEEPPINK, 50);
+    }
+
+    private void restart() {
+        isGameStopped = false;
+        countClosedTiles = SIDE * SIDE;
+        countFlags = 0;
+        score = 0;
+        countMinesOnField = 0;
+        setScore(score);
+        createGame();
     }
 
     private void createGame() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
                 setCellColor(x, y, Color.ORANGE);
+                setCellValue(x, y, "");
                 boolean itIsMine = getRandomNumber(10) == 0;
                 gameField[y][x] = new GameObject(x, y, itIsMine);
                 if (itIsMine) countMinesOnField++;
             }
         }
-        isGameStopped = false;
         countFlags = countMinesOnField;
         countMineNeighbors();
     }
