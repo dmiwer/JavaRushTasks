@@ -12,14 +12,16 @@ public class MinesweeperGame extends Game {
     private GameObject[][] gameField = new GameObject[SIDE][SIDE];
     private int countMinesOnField;
     private int countFlags;
+    private boolean isGameStopped;
 
 
     private void openTile(int x, int y) {
         gameField[y][x].isOpen = true;
         setCellColor(x, y, Color.GREEN);
-        if (gameField[y][x].isMine)
-            setCellValue(x, y, MINE);
-        else if (gameField[y][x].countMineNeighbors != 0)
+        if (gameField[y][x].isMine) {
+            setCellValueEx(x, y, Color.RED, MINE);
+            gameOver();
+        } else if (gameField[y][x].countMineNeighbors != 0)
             setCellNumber(x, y, gameField[y][x].countMineNeighbors);
         else {
             for (GameObject neighbor : getNeighbors(gameField[y][x]))
@@ -29,8 +31,8 @@ public class MinesweeperGame extends Game {
     }
 
     private void markTile(int x, int y) {
-        if (gameField[y][x].isOpen)
-            return;
+        if (isGameStopped) return;
+        if (gameField[y][x].isOpen) return;
         if (gameField[y][x].isFlag) {
             gameField[y][x].isFlag = false;
             countFlags++;
@@ -38,8 +40,7 @@ public class MinesweeperGame extends Game {
             setCellColor(x, y, Color.ORANGE);
             return;
         }
-        if (countFlags == 0)
-            return;
+        if (countFlags == 0) return;
         gameField[y][x].isFlag = true;
         countFlags--;
         setCellValue(x, y, FLAG);
@@ -65,6 +66,11 @@ public class MinesweeperGame extends Game {
         createGame();
     }
 
+    private void gameOver(){
+        isGameStopped = true;
+        showMessageDialog(Color.AQUA, "it is over", Color.DEEPPINK, 5);
+    }
+
     private void createGame() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
@@ -74,6 +80,7 @@ public class MinesweeperGame extends Game {
                 if (itIsMine) countMinesOnField++;
             }
         }
+        isGameStopped = false;
         countFlags = countMinesOnField;
         countMineNeighbors();
     }
