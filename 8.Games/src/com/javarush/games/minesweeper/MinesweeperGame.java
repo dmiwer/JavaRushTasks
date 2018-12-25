@@ -21,13 +21,13 @@ public class MinesweeperGame extends Game {
         if (isGameStopped) return;
         if (gameField[y][x].isOpen) return;
         if (gameField[y][x].isFlag) return;
-        setCellColor(x, y, Color.GREEN);
         gameField[y][x].isOpen = true;
         countClosedTiles--;
         if (gameField[y][x].isMine) {
             setCellValueEx(x, y, Color.RED, MINE);
             gameOver();
         } else {
+            setCellColor(x, y, Color.GREEN);
             score += 5;
             setScore(score);
             if (countClosedTiles == countMinesOnField) {
