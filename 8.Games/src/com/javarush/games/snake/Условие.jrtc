@@ -1,4 +1,22 @@
-taskKey="com.javarush.games.snake.part01"\n\nИгра змейка (1/20)
+taskKey="com.javarush.games.snake.part02"\n\nИгра змейка (2/20)
+
+Мы готовы создать игру. Чтобы выполнить это действие, будем использовать отдельный метод — createGame().
+Он будет содержать команды, которые выполняются при запуске игры.
+Чтобы отрисовать игровое поле, создай метод drawScene().
+
+Метод initialize() будет вызывать createGame(). Метод createGame() будет вызывать drawScene(). А метод drawScene() пока будет раскрашивать игровой экран.
+
+
+Требования:
+1.	В классе SnakeGame должен существовать private void метод createGame().
+2.	В классе SnakeGame должен существовать private void метод drawScene().
+3.	В методе createGame() должен быть вызван метод drawScene().
+4.	В методе initialize() должен быть вызван метод createGame().
+5.	В методе initialize() метод createGame() вызывается после метода setScreenSize(int, int).
+6.	В методе drawScene() для каждой ячейки игрового поля вызови метод setCellColor(int, int, Color) с параметрами: координаты x и y и любой цвет. Например, Color.DARKSEAGREEN).
+
+
+Игра змейка (1/20)
 
 Давай напишем игру "Змейка".
 Правила игры:
@@ -22,14 +40,5 @@ import com.javarush.engine.cell.*;
 Переопредели метод родительского класса public void initialize(): он будет содержать команды, которые
 выполнятся один раз при запуске игры. Например, установка размеров игрового поля.
 
-
-Требования:
-1.	Должен существовать публичный класс SnakeGame.
-2.	Класс SnakeGame должен быть наследником класса Game.
-3.	В классе SnakeGame должно существовать поле public static final int WIDTH, инициализированное при объявлении значением 15.
-4.	В классе SnakeGame должно существовать поле public static final int HEIGHT, инициализированное при объявлении значением 15.
-5.	В классе SnakeGame должен быть переопределен метод initialize() родительского класса Game.
-6.	В методе initialize() должен быть вызван метод setScreenSize(int, int) класса Game c параметрами WIDTH и HEIGHT.
-7.	В классе SnakeGame должен быть импорт всего содержимого пакета com.javarush.engine.cell.
 
 
