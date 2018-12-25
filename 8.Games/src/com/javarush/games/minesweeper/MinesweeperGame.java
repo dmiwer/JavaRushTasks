@@ -10,6 +10,7 @@ public class MinesweeperGame extends Game {
     private static final String FLAG = "\uD83D\uDEA9";
     private static final int SIDE = 9;
     private GameObject[][] gameField = new GameObject[SIDE][SIDE];
+    private int countClosedTiles = SIDE * SIDE;
     private int countMinesOnField;
     private int countFlags;
     private boolean isGameStopped;
@@ -19,17 +20,22 @@ public class MinesweeperGame extends Game {
         if (isGameStopped) return;
         if (gameField[y][x].isOpen) return;
         if (gameField[y][x].isFlag) return;
-        gameField[y][x].isOpen = true;
         setCellColor(x, y, Color.GREEN);
+        gameField[y][x].isOpen = true;
+        countClosedTiles--;
         if (gameField[y][x].isMine) {
             setCellValueEx(x, y, Color.RED, MINE);
             gameOver();
-        } else if (gameField[y][x].countMineNeighbors != 0)
-            setCellNumber(x, y, gameField[y][x].countMineNeighbors);
-        else {
-            for (GameObject neighbor : getNeighbors(gameField[y][x]))
-                if (!neighbor.isOpen) openTile(neighbor.x, neighbor.y);
-            setCellValue(x, y, "");
+        } else {
+            if (countClosedTiles == countMinesOnField) {
+                win();
+            } else if (gameField[y][x].countMineNeighbors != 0) {
+                setCellNumber(x, y, gameField[y][x].countMineNeighbors);
+            } else {
+                for (GameObject neighbor : getNeighbors(gameField[y][x]))
+                    if (!neighbor.isOpen) openTile(neighbor.x, neighbor.y);
+                setCellValue(x, y, "");
+            }
         }
     }
 
@@ -69,9 +75,14 @@ public class MinesweeperGame extends Game {
         createGame();
     }
 
-    private void gameOver(){
+    private void gameOver() {
         isGameStopped = true;
-        showMessageDialog(Color.AQUA, "it is over", Color.DEEPPINK, 5);
+        showMessageDialog(Color.AQUA, "it`s over", Color.DEEPPINK, 50);
+    }
+
+    private void win(){
+        isGameStopped = true;
+        showMessageDialog(Color.AQUA, "WIN", Color.DEEPPINK, 50);
     }
 
     private void createGame() {
