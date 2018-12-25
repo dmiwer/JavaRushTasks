@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MinesweeperGame extends Game {
+    private static final String MINE = "\uD83D\uDCA3";
+    private static final String FLAG = "\uD83D\uDEA9";
     private static final int SIDE = 9;
     private GameObject[][] gameField = new GameObject[SIDE][SIDE];
     private int countMinesOnField;
-    private static final String MINE = "\uD83D\uDCA3";
+    private int countFlags;
+
 
     private void openTile(int x, int y) {
         if (gameField[y][x].isMine)
@@ -42,6 +45,7 @@ public class MinesweeperGame extends Game {
                 if (itIsMine) countMinesOnField++;
             }
         }
+        countFlags = countMinesOnField;
         countMineNeighbors();
     }
 
