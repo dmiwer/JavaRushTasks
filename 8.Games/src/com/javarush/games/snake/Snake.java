@@ -12,24 +12,24 @@ public class Snake {
     private Direction direction = Direction.LEFT;
     public boolean isAlive = true;
 
-    public void setDirection(Direction direction) {
-        switch (this.direction) {
-            case LEFT:
-            case RIGHT:
-                if (snakeParts.get(0).x == snakeParts.get(1).x) return;
-                break;
-            case UP:
-            case DOWN:
-                if (snakeParts.get(0).y == snakeParts.get(1).y) return;
-                break;
-        }
-        this.direction = direction;
-    }
-
     public Snake(int x, int y) {
         snakeParts.add(new GameObject(x, y));
         snakeParts.add(new GameObject(x + 1, y));
         snakeParts.add(new GameObject(x + 2, y));
+    }
+
+    public void setDirection(Direction direction) {
+        switch (direction) {
+            case LEFT:
+            case RIGHT:
+                if (snakeParts.get(0).y == snakeParts.get(1).y) return;
+                break;
+            case UP:
+            case DOWN:
+                if (snakeParts.get(0).x == snakeParts.get(1).x) return;
+                break;
+        }
+        this.direction = direction;
     }
 
     public int getLength() {
