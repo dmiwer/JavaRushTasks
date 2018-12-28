@@ -23,14 +23,17 @@ public class Snake {
             this.direction = direction;
     }
 
-    public void move() {
+    public void move(Apple apple) {
         GameObject newHead = createNewHead();
         if (newHead.x < 0 || newHead.x == SnakeGame.WIDTH ||
                 newHead.y < 0 || newHead.y == SnakeGame.HEIGHT) {
             isAlive = false;
             return;
         }
-        removeTail();
+        if (newHead.x == apple.x && newHead.y == apple.y)
+            apple.isAlive = false;
+        else
+            removeTail();
         snakeParts.add(0, newHead);
 
     }
