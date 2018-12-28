@@ -23,6 +23,10 @@ public class Snake {
             this.direction = direction;
     }
 
+    public int getLength(){
+        return snakeParts.size();
+    }
+
     public void move(Apple apple) {
         GameObject newHead = createNewHead();
         if (checkCollision(newHead)
