@@ -19,13 +19,14 @@ public class Snake {
     }
 
     public void setDirection(Direction direction) {
-        this.direction = direction;
+        if (direction.ordinal() % 2 != this.direction.ordinal() % 2)
+            this.direction = direction;
     }
 
     public void move() {
         GameObject newHead = createNewHead();
         if (newHead.x < 0 || newHead.x == SnakeGame.WIDTH ||
-            newHead.y < 0 || newHead.y == SnakeGame.HEIGHT){
+                newHead.y < 0 || newHead.y == SnakeGame.HEIGHT) {
             isAlive = false;
             return;
         }

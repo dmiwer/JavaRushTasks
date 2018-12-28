@@ -22,6 +22,25 @@ public class SnakeGame extends Game {
         drawScene();
     }
 
+    @Override
+    public void onKeyPress(Key key) {
+        super.onKeyPress(key);
+        switch (key) {
+            case LEFT:
+                snake.setDirection(Direction.LEFT);
+                break;
+            case RIGHT:
+                snake.setDirection(Direction.RIGHT);
+                break;
+            case UP:
+                snake.setDirection(Direction.UP);
+                break;
+            case DOWN:
+                snake.setDirection(Direction.DOWN);
+                break;
+        }
+    }
+
     private void drawScene() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
