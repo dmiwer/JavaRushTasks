@@ -25,8 +25,9 @@ public class Snake {
 
     public void move(Apple apple) {
         GameObject newHead = createNewHead();
-        if (newHead.x < 0 || newHead.x == SnakeGame.WIDTH ||
-                newHead.y < 0 || newHead.y == SnakeGame.HEIGHT) {
+        if (checkCollision(newHead)
+                || newHead.x < 0 || newHead.x == SnakeGame.WIDTH
+                || newHead.y < 0 || newHead.y == SnakeGame.HEIGHT) {
             isAlive = false;
             return;
         }
@@ -46,6 +47,13 @@ public class Snake {
         if (direction == Direction.UP) y--;
         else if (direction == Direction.DOWN) y++;
         return new GameObject(x, y);
+    }
+
+    public boolean checkCollision(GameObject gameObject) {
+        for (GameObject snakePart : snakeParts)
+            if (snakePart.x == gameObject.x && snakePart.y == gameObject.y)
+                return true;
+        return false;
     }
 
     public void removeTail() {
