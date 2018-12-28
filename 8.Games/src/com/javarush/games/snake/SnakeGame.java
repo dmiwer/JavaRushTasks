@@ -20,7 +20,6 @@ public class SnakeGame extends Game {
 
     @Override
     public void onTurn(int step) {
-//        super.onTurn(step);
         snake.move(apple);
         if (!apple.isAlive) createNewApple();
         if (!snake.isAlive) gameOver();
@@ -30,7 +29,6 @@ public class SnakeGame extends Game {
 
     @Override
     public void onKeyPress(Key key) {
-//        super.onKeyPress(key);
         switch (key) {
             case LEFT:
                 snake.setDirection(Direction.LEFT);
@@ -45,7 +43,7 @@ public class SnakeGame extends Game {
                 snake.setDirection(Direction.DOWN);
                 break;
             case SPACE:
-                if (isGameStopped == true) createGame();
+                if (isGameStopped) createGame();
                 break;
         }
     }
