@@ -22,8 +22,22 @@ public class Snake {
         this.direction = direction;
     }
 
-    public void move(){
+    public void move() {
 
+    }
+
+    public GameObject createNewHead() {
+        int x = snakeParts.get(0).x;
+        if (direction == Direction.LEFT) x--;
+        else if (direction == Direction.RIGHT) x++;
+        int y = snakeParts.get(0).y;
+        if (direction == Direction.UP) y--;
+        else if (direction == Direction.DOWN) y++;
+        return new GameObject(x, y);
+    }
+
+    public void removeTail() {
+        snakeParts.remove(snakeParts.size() - 1);
     }
 
     public void draw(Game game) {
