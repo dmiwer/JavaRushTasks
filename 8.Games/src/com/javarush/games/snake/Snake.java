@@ -22,6 +22,10 @@ public class Snake {
         this.direction = direction;
     }
 
+    public void move(){
+
+    }
+
     public void draw(Game game) {
         Color color = isAlive ? Color.BLACK : Color.RED;
         for (int i = 0; i < snakeParts.size(); i++) {
