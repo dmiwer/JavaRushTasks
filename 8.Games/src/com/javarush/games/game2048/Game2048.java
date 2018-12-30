@@ -13,6 +13,18 @@ public class Game2048 extends Game {
         drawScene();
     }
 
+    private void createNewNumber() {
+        int x, y;
+        do {
+            x = getRandomNumber(SIDE);
+            y = getRandomNumber(SIDE);
+        } while (gameField[y][x] != 0);
+        if (getRandomNumber(10) == 9)
+            gameField[y][x] = 4;
+        else
+            gameField[y][x] = 2;
+    }
+
     private void drawScene() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
@@ -22,6 +34,7 @@ public class Game2048 extends Game {
     }
 
     private void createGame() {
-
+        createNewNumber();
+        createNewNumber();
     }
 }
