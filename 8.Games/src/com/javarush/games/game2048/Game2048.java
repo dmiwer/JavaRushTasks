@@ -10,6 +10,7 @@ public class Game2048 extends Game {
     public void initialize() {
         setScreenSize(SIDE, SIDE);
         createGame();
+//        gameField = new int[][]{{2,4,8,16},{32,64,128,256},{512,1024,2048,0},{2,8,4,16}};
         drawScene();
     }
 
@@ -25,10 +26,33 @@ public class Game2048 extends Game {
             gameField[y][x] = 2;
     }
 
+    private Color getColorByValue(int value) {
+        switch (value){
+            case 0: return Color.WHITE;
+            case 2: return Color.AQUA;
+            case 4: return Color.DEEPPINK;
+            case 8: return Color.GREEN;
+            case 16: return Color.ORANGE;
+            case 32: return Color.RED;
+            case 64: return Color.YELLOW;
+            case 128: return Color.WHEAT;
+            case 256: return Color.ANTIQUEWHITE;
+            case 512: return Color.AQUAMARINE;
+            case 1024: return Color.CADETBLUE;
+            case 2048: return Color.VIOLET;
+        }
+        return Color.BLACK;
+    }
+
+    private void setCellColoredNumber(int x, int y, int value) {
+        String val = value == 0 ? "" : String.valueOf(value);
+        setCellValueEx(x, y, getColorByValue(value), val);
+    }
+
     private void drawScene() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
-                setCellColor(x, y, Color.RED);
+                setCellColoredNumber(x, y, gameField[y][x]);
             }
         }
     }
