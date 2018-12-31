@@ -60,20 +60,32 @@ public class Game2048 extends Game {
         switch (key) {
             case LEFT:
                 moveLeft();
+                drawScene();
                 break;
             case RIGHT:
                 moveRight();
+                drawScene();
                 break;
             case UP:
                 moveUp();
+                drawScene();
                 break;
             case DOWN:
                 moveDown();
+                drawScene();
                 break;
         }
     }
 
     private void moveLeft() {
+        boolean res = false;
+        for (int[] ints : gameField)
+            if (compressRow(ints) | mergeRow(ints)) {
+                compressRow(ints);
+                res = true;
+            }
+        if (res) createNewNumber();
+
     }
 
     private void moveRight() {
