@@ -55,6 +55,14 @@ public class Game2048 extends Game {
         return res;
     }
 
+    private void rotateClockwise() {
+        int[][] rotatedField = new int[SIDE][SIDE];
+        for (int i = 0; i < SIDE; i++)
+            for (int j = 0; j < SIDE; j++)
+                rotatedField[i][j] = gameField[SIDE - j - 1][i];
+        gameField = rotatedField;
+    }
+
     @Override
     public void onKeyPress(Key key) {
         switch (key) {
