@@ -26,20 +26,47 @@ public class Game2048 extends Game {
             gameField[y][x] = 2;
     }
 
+    private boolean compressRow(int[] row) {
+        boolean res = false;
+        for (int i = 0; i < SIDE - 1; i++) {
+            for (int j = i + 1; j < SIDE; j++) {
+                if (row[i] == 0 && row[j] != 0) {
+                    int t = row[i];
+                    row[i] = row[j];
+                    row[j] = t;
+                    res = true;
+                }
+            }
+        }
+        return res;
+    }
+
     private Color getColorByValue(int value) {
-        switch (value){
-            case 0: return Color.WHITE;
-            case 2: return Color.AQUA;
-            case 4: return Color.DEEPPINK;
-            case 8: return Color.GREEN;
-            case 16: return Color.ORANGE;
-            case 32: return Color.RED;
-            case 64: return Color.YELLOW;
-            case 128: return Color.WHEAT;
-            case 256: return Color.ANTIQUEWHITE;
-            case 512: return Color.AQUAMARINE;
-            case 1024: return Color.CADETBLUE;
-            case 2048: return Color.VIOLET;
+        switch (value) {
+            case 0:
+                return Color.WHITE;
+            case 2:
+                return Color.AQUA;
+            case 4:
+                return Color.DEEPPINK;
+            case 8:
+                return Color.GREEN;
+            case 16:
+                return Color.ORANGE;
+            case 32:
+                return Color.RED;
+            case 64:
+                return Color.YELLOW;
+            case 128:
+                return Color.WHEAT;
+            case 256:
+                return Color.ANTIQUEWHITE;
+            case 512:
+                return Color.AQUAMARINE;
+            case 1024:
+                return Color.CADETBLUE;
+            case 2048:
+                return Color.VIOLET;
         }
         return Color.BLACK;
     }
