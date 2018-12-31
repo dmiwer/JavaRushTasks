@@ -41,6 +41,18 @@ public class Game2048 extends Game {
         return res;
     }
 
+    private boolean mergeRow(int[] row) {
+        boolean res = false;
+        for (int i = 0; i < SIDE - 1; i++) {
+            if (row[i] != 0 && row[i] == row[i + 1]) {
+                row[i] *= 2;
+                row[i + 1] = 0;
+                res = true;
+            }
+        }
+        return res;
+    }
+
     private Color getColorByValue(int value) {
         switch (value) {
             case 0:
