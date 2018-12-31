@@ -23,23 +23,31 @@ public class Game2048 extends Game {
             gameOver();
             return;
         }
-        switch (key) {
-            case LEFT:
-                moveLeft();
+        if (isGameStopped) {
+            if (key == Key.SPACE) {
+                isGameStopped = false;
+                createGame();
                 drawScene();
-                break;
-            case RIGHT:
-                moveRight();
-                drawScene();
-                break;
-            case UP:
-                moveUp();
-                drawScene();
-                break;
-            case DOWN:
-                moveDown();
-                drawScene();
-                break;
+            }
+        } else {
+            switch (key) {
+                case LEFT:
+                    moveLeft();
+                    drawScene();
+                    break;
+                case RIGHT:
+                    moveRight();
+                    drawScene();
+                    break;
+                case UP:
+                    moveUp();
+                    drawScene();
+                    break;
+                case DOWN:
+                    moveDown();
+                    drawScene();
+                    break;
+            }
         }
     }
 
@@ -192,6 +200,7 @@ public class Game2048 extends Game {
     }
 
     private void createGame() {
+        gameField = new int[SIDE][SIDE];
         createNewNumber();
         createNewNumber();
     }
@@ -201,7 +210,7 @@ public class Game2048 extends Game {
         showMessageDialog(Color.NONE, "Win!", Color.DEEPPINK, 70);
     }
 
-    private void gameOver(){
+    private void gameOver() {
         isGameStopped = true;
         showMessageDialog(Color.NONE, "it`s over", Color.DEEPPINK, 70);
     }
