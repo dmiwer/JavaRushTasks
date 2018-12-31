@@ -57,6 +57,17 @@ public class Game2048 extends Game {
         return res;
     }
 
+    private boolean canUserMove() {
+        for (int x = 0; x < SIDE; x++) {
+            for (int y = 0; y < SIDE; y++) {
+                if (gameField[y][x] == 0) return true;
+                if (x < SIDE - 1 && gameField[y][x] == gameField[y][x + 1]) return true;
+                if (y < SIDE - 1 && gameField[y][x] == gameField[y + 1][x]) return true;
+            }
+        }
+        return false;
+    }
+
     private void rotateClockwise() {
         int[][] rotatedField = new int[SIDE][SIDE];
         for (int i = 0; i < SIDE; i++)
