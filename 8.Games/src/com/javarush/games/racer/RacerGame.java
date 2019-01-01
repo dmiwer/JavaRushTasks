@@ -24,9 +24,20 @@ public class RacerGame extends Game {
         }
     }
 
+    @Override
+    public void onTurn(int step) {
+        moveAll();
+        drawScene();
+    }
+
+    private void moveAll(){
+        roadMarking.move(player.speed);
+    }
+
     private void createGame() {
         roadMarking = new RoadMarking();
         player = new PlayerCar();
+        setTurnTimer(40);
         drawScene();
     }
 
