@@ -30,8 +30,21 @@ public class RacerGame extends Game {
         drawScene();
     }
 
-    private void moveAll(){
+    @Override
+    public void onKeyPress(Key key) {
+        switch (key) {
+            case LEFT:
+                player.setDirection(Direction.LEFT);
+                break;
+            case RIGHT:
+                player.setDirection(Direction.RIGHT);
+                break;
+        }
+    }
+
+    private void moveAll() {
         roadMarking.move(player.speed);
+        player.move();
     }
 
     private void createGame() {
