@@ -42,6 +42,18 @@ public class RacerGame extends Game {
         }
     }
 
+    @Override
+    public void onKeyReleased(Key key) {
+        switch (key) {
+            case LEFT:
+                if (player.getDirection() == Direction.LEFT) player.setDirection(Direction.NONE);
+                break;
+            case RIGHT:
+                if (player.getDirection() == Direction.RIGHT) player.setDirection(Direction.NONE);
+                break;
+        }
+    }
+
     private void moveAll() {
         roadMarking.move(player.speed);
         player.move();
