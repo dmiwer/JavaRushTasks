@@ -25,4 +25,8 @@ public class PlayerCar extends GameObject {
         if (x < RoadManager.LEFT_BORDER) x = RoadManager.LEFT_BORDER;
         else if (x > RoadManager.RIGHT_BORDER - width) x = RoadManager.RIGHT_BORDER - width;
     }
+
+    public void stop() {
+        matrix = ShapeMatrix.PLAYER_DEAD;
+    }
 }
