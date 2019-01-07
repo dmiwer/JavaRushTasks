@@ -27,8 +27,14 @@ public class RoadManager {
             case THORN:
                 return new Thorn(x, y);
             default:
-                return null;
+                return new Car(type, x, y);
         }
+    }
+
+    private void generateRegularCar(Game game) {
+        int carTypeNumber = game.getRandomNumber(4);
+        if (game.getRandomNumber(100) < 30)
+            addRoadObject(RoadObjectType.values()[carTypeNumber], game);
     }
 
     private void deletePassedItems() {
@@ -61,6 +67,7 @@ public class RoadManager {
 
     public void generateNewRoadObjects(Game game) {
         generateThorn(game);
+        generateRegularCar(game);
     }
 
     public boolean checkCrush(PlayerCar playerCar) {
