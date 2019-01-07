@@ -6,6 +6,7 @@ import com.javarush.games.racer.RacerGame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class RoadManager {
     public static final int LEFT_BORDER = RacerGame.ROADSIDE_WIDTH;
@@ -13,7 +14,12 @@ public class RoadManager {
     private static final int PLAYER_CAR_DISTANCE = 12;
     private static final int FIRST_LANE_POSITION = 16;
     private static final int FOURTH_LANE_POSITION = 44;
+    private int passedCarsCount = 0;
     private List<RoadObject> items = new ArrayList<>();
+
+    public int getPassedCarsCount() {
+        return passedCarsCount;
+    }
 
     private boolean isRoadSpaceFree(RoadObject roadObject) {
         for (RoadObject item : items) {
@@ -48,7 +54,11 @@ public class RoadManager {
     }
 
     private void deletePassedItems() {
-        items.removeIf(roadObject -> roadObject.y >= RacerGame.HEIGHT);
+        items.removeIf(roadObject -> {
+            if (roadObject.y < RacerGame.HEIGHT) return false;
+            if (roadObject.type != RoadObjectType.THORN) passedCarsCount++;
+            return true;
+        });
     }
 
     public void draw(Game game) {
