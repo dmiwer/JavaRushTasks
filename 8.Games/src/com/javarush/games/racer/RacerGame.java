@@ -15,6 +15,7 @@ public class RacerGame extends Game {
     private boolean isGameStopped;
     private FinishLine finishLine;
     private ProgressBar progressBar;
+    private int score;
 
     @Override
     public void initialize() {
@@ -41,6 +42,8 @@ public class RacerGame extends Game {
                 finishLine.show();
             roadManager.generateNewRoadObjects(this);
             moveAll();
+            score -= 5;
+            setScore(score);
         }
         drawScene();
     }
@@ -88,6 +91,7 @@ public class RacerGame extends Game {
     }
 
     private void createGame() {
+        score = 3500;
         isGameStopped = false;
         finishLine = new FinishLine();
         roadMarking = new RoadMarking();
@@ -105,7 +109,7 @@ public class RacerGame extends Game {
         player.stop();
     }
 
-    private void win(){
+    private void win() {
         isGameStopped = true;
         showMessageDialog(Color.NONE, "you won", Color.DEEPPINK, 70);
         stopTurnTimer();
