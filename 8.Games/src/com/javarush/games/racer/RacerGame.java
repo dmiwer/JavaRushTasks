@@ -14,6 +14,7 @@ public class RacerGame extends Game {
     private RoadManager roadManager;
     private boolean isGameStopped;
     private FinishLine finishLine;
+    private ProgressBar progressBar;
 
     @Override
     public void initialize() {
@@ -80,6 +81,7 @@ public class RacerGame extends Game {
         finishLine.move(player.speed);
         roadMarking.move(player.speed);
         roadManager.move(player.speed);
+        progressBar.move(roadManager.getPassedCarsCount());
         player.move();
     }
 
@@ -88,6 +90,7 @@ public class RacerGame extends Game {
         finishLine = new FinishLine();
         roadMarking = new RoadMarking();
         player = new PlayerCar();
+        progressBar = new ProgressBar(RACE_GOAL_CARS_COUNT);
         setTurnTimer(40);
         roadManager = new RoadManager();
         drawScene();
@@ -105,6 +108,7 @@ public class RacerGame extends Game {
         roadMarking.draw(this);
         finishLine.draw(this);
         roadManager.draw(this);
+        progressBar.draw(this);
         player.draw(this);
     }
 
