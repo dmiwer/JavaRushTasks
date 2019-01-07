@@ -17,7 +17,7 @@ public class RoadObject extends GameObject {
         this.height = matrix.length;
     }
 
-    public void move(int boost) {
+    public void move(int boost, List<RoadObject> items) {
         this.y += boost;
     }
 

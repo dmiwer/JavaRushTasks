@@ -5,7 +5,6 @@ import com.javarush.games.racer.PlayerCar;
 import com.javarush.games.racer.RacerGame;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class RoadManager {
@@ -35,6 +34,8 @@ public class RoadManager {
         switch (type) {
             case THORN:
                 return new Thorn(x, y);
+            case DRUNK_CAR:
+                return new MovingCar(x, y);
             default:
                 return new Car(type, x, y);
         }
@@ -58,7 +59,7 @@ public class RoadManager {
 
     public void move(int boost) {
         for (RoadObject item : items) {
-            item.move(boost + item.speed);
+            item.move(boost + item.speed, items);
         }
         deletePassedItems();
     }
@@ -69,13 +70,25 @@ public class RoadManager {
         return false;
     }
 
+    private boolean isMovingCarExists() {
+        for (RoadObject item : items)
+            if (item.type == RoadObjectType.DRUNK_CAR) return true;
+        return false;
+    }
+
     private void generateThorn(Game game) {
         if (game.getRandomNumber(100) < 10 && !isThornExists())
             addRoadObject(RoadObjectType.THORN, game);
     }
 
+    private void generateMovingCar(Game game) {
+        if (game.getRandomNumber(100) < 10 && !isMovingCarExists())
+            addRoadObject(RoadObjectType.DRUNK_CAR, game);
+    }
+
     public void generateNewRoadObjects(Game game) {
         generateThorn(game);
+        generateMovingCar(game);
         generateRegularCar(game);
     }
 
