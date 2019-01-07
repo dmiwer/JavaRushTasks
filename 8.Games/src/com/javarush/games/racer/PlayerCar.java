@@ -19,6 +19,10 @@ public class PlayerCar extends GameObject {
         this.direction = direction;
     }
 
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
     public void move() {
         if (direction == Direction.LEFT) x--;
         else if (direction == Direction.RIGHT) x++;

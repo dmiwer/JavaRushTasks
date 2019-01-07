@@ -41,6 +41,13 @@ public class RacerGame extends Game {
     @Override
     public void onKeyPress(Key key) {
         switch (key) {
+            case SPACE:
+                if (isGameStopped)
+                    createGame();
+                break;
+            case UP:
+                player.setSpeed(2);
+                break;
             case LEFT:
                 player.setDirection(Direction.LEFT);
                 break;
@@ -53,6 +60,9 @@ public class RacerGame extends Game {
     @Override
     public void onKeyReleased(Key key) {
         switch (key) {
+            case UP:
+                player.setSpeed(1);
+                break;
             case LEFT:
                 if (player.getDirection() == Direction.LEFT) player.setDirection(Direction.NONE);
                 break;
