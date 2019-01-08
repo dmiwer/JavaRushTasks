@@ -1,0 +1,10 @@
+﻿*.iml
+*.iws
+*.jrtc
+*.java
+*.class
+*.info
+*.properties
+*.jar
+
+!**/task2113/*
