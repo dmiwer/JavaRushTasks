@@ -48,5 +48,7 @@ public class Hippodrome {
         game.getHorses().add(new Horse("one", 3, 0));
         game.getHorses().add(new Horse("two", 3, 0));
         game.getHorses().add(new Horse("six", 3, 0));
+
+        game.run();
     }
 }
